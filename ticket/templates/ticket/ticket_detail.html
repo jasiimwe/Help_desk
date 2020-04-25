@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+  <title>TICKET DETAILS</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %} ">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %} ">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  {% include 'snippets/aside.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"><b>Ticket Details </b></h1>
+            
+            
+          </div><!-- /.col -->
+          <div class="col-sm-12">
+
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Details : {{ ticket_form.ticket_num }} </li>
+
+            </ol>
+
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+
+      	<div class="col-lg-12">
+            <!-- <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Featured</h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Special title treatment</h6>
+
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div> -->
+
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h5 class="m-0">Details for : <b>{{ ticket_form.ticket_num }}</b><a data-toggle="modal" data-target="#editModal" href="" class="btn btn-primary" style="float: right;">Add stage</a></h5>
+               
+
+              </div>
+              <div class="card-body">
+               
+
+                <div class="row">
+        	<div class="row">
+        	<div class="col-md-4">     
+            <dl class="row" style="padding-bottom: 10px;">
+            	<dd class="col-sm-4"> Ticket Number:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.ticket_num }}</dt>
+                <dd class="col-sm-4">Ticket Catefory:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.ticket_category}}</dt>
+                <dd class="col-sm-4">Description:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.description }}</dt> 
+                <dd class="col-sm-4">Staff Name:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.full_name }}</dt>           	
+            </dl>
+          </div>
+          <div class="col-md-4">
+          	<dl class="row" style="padding-bottom: 10px;">
+            	<dd class="col-sm-4">Staff Station:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.station }}</dt>
+                <dd class="col-sm-4">Assigned Technician</dd>
+                <dt class="col-sm-8">{{ ticket_detail.technician}}</dt>
+                <dd class="col-sm-4">Status:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.status}}</dt>
+                <dd class="col-sm-4">Ticket Priority:</dd>
+                <dt class="col-sm-8">{{ ticket_detail.priority}}</dt> 
+                           	
+            </dl>
+          </div>
+          <div class="col-md-4">
+          	<dl class="row" style="padding-bottom: 10px;">
+              <dd class="col-sm-4">Action Taken:</dd>
+              <dt class="col-sm-8">{{ ticket_detail.action_taken }}</dt>
+            	
+                        	
+            </dl>
+          </div>
+         <!-- /.col-md-6 -->
+          
+          <!-- /.col-md-6 -->
+        </div>
+                <!-- <a data-toggle="modal" data-target="#editModal" href="" class="btn btn-primary">Add stage</a>
+                <a href="show_equipment.php" class="btn btn-warning float-right">Back</a> -->
+              </div>
+            </div>
+          </div> 
+        
+         
+          <!-- /.col-md-6 -->
+          
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+       
+        <!-- /.col -->
+      </div>
+
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Stage</h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" action="ticket_detail.php"> {% csrf_token %}
+                        <div class="card-body">
+                            
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="ticket_status">
+                                    
+                                    {% for stat in ticket_form.instance.status %}
+                                        <option value=""> {{stat}} </option>
+                                    {% endfor %}
+                                        
+                                </select>
+                            </div>
+                            <div class="form-group">
+                            <label >Action Taken </label>
+                            <textarea class="form-control" rows="3" placeholder="Course of action" name="action_taken" required="true" >{{ ticket_form.instance.action_taken }}</textarea>
+                            </div>                 
+                            
+                            <div class="form-group">
+                                <label>Priority Level</label>
+                                <select class="form-control" name="priority_level">
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Assign To:</label>
+                                <select class="form-control" name="assignee">
+                                    
+                                <?php while ($stf = mysqli_fetch_array($staff_query)) { ?>
+                                    <option value="<?php echo $stf['full_name']; ?>" ><?php echo $stf['full_name']; ?></option>
+                                <?php } ?>
+                                
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info" name="add_stage">Add Stage</button>
+                            <button type="submit" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                        </div>
+                        <!-- /.card-footer -->
+                        </form>
+                    </div>
+                    <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!--timeline -->
+        <div class="row" style="padding-left: 50px;">
+          <div class="col-sm-6">
+            <h1>Equipment cycle</h1>
+          </div>
+          <div class="col-md-12">
+        <?php while ($e = mysqli_fetch_array($get_audit_query)) {?>
+        
+        <div class="timeline">
+          
+              <!-- timeline time label -->
+              <div class="time-label">
+                <?php 
+                      $alert = "";
+                    if($e['new_stage'] == "Ready" ){
+                      $alert = "success";
+                    }elseif($e['new_stage'] == "Progress"){
+                      $alert = "warning";
+                    }elseif($e['new_stage'] == "Taken"){
+                      $alert = "primary";
+                    }elseif($e['new_stage'] == "Open"){
+                      $alert = "info";
+                    }
+
+                   ?>
+                <span class="bg-<?php echo $alert; ?>"> {{ equipment_detail.status }} on <?php echo {{ equipment_detail.created_at }}</span>
+              </div>
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+              <div>
+
+                <i class="fas fa-pen bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 12:05</span>
+                  <h3 class="timeline-header"><a href="#">Stage Details</a> </h3>
+
+                  <div class="timeline-body" >
+                    <ul style="list-style: none;">
+                      <li>Action Taken: <b>{{ equipment_detail.recommendation }}</b></li>
+                      <li>Current Location: <b>{{ equipment_detail.current_location }}</b></li>
+                      <li>Delivered by: <b>{{ equipment_detail.delivered_by }}</b></li>
+                    </ul>
+                    
+                  </div>
+                  <div class="timeline-footer">
+                    <?php
+                      if($e['new_stage'] == "Taken" || $e['new_stage'] == "Progress"){ ?>
+                        <!-- /*$output = "<a class='btn btn-primary btn-sm' href='generate_docs.php?id=<?php echo $row["eq_id"]?>'>Generate Gate Pass</a>";
+                        echo $output;*/ -->
+                        <a class="btn btn-primary btn-sm" href="generate_docs.php?id=<?php echo $row['eq_id']?>">Gate Pass</a>
+                     <?php } 
+                    ?>
+                    <!-- <a class="btn btn-primary btn-sm">Read more</a>
+                    <a class="btn btn-danger btn-sm">Delete</a> -->
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+              <!-- END timeline item -->          
+              <!-- END timeline item -->
+             
+            </div>
+            </div>
+          </div>
+
+
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %} "></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %} "></script>
+</body>
+</html>
