@@ -33,7 +33,7 @@ urlpatterns = [
     path('account/', account_view, name='account'),
     path('logout/', logout_view, name='logout'),
     path('equipment/', include('equipment.urls')),
-    path('ticket/', include('ticket.urls')),
+    path('ticket/', include('ticket.urls',namespace='ticket')),
 
     path('api/account/', include('account.api.urls', 'account_api')),
     

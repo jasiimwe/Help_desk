@@ -77,6 +77,11 @@
                     name="full_name" value="">
                   </div>
                   <div class="form-group">
+                    <label >Ticket Number</label>
+                    <input type="text" class="form-control" placeholder="Enter Ticket Number" 
+                    name="ticket_num" value="">
+                  </div>
+                  <div class="form-group">
                     <label>DPP Station</label>
                       <input class="form-control" type="text" name="station" placeholder="Enter your station">      
                   </div>
@@ -84,11 +89,10 @@
                       <label>Category of Request</label>
                         <select class="form-control" name="ticket_category">
                           
-                          {% for cat in ticket_form.ticket_category %}
-                              <option value="">{{ cat }}</option>
+                          {% for value, name in form.fields.ticket_category.choices %}
+                              <option value="{{ value }}">{{ name }}</option>
                           {% endfor %}
-                              
-                        
+                           
                         </select>
                   </div>
                   

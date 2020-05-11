@@ -36,12 +36,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Manage Equipment</h1>
+            <h1>Manage Ticket</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Show equipment</li>
+              <li class="breadcrumb-item active">Show ticket</li>
             </ol>
           </div>
         </div>
@@ -54,8 +54,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Show Equipment</h3>
-              <a class="btn btn-info float-right" name="new_equipment" style="color: white;" href="{% url 'create_equipment' %}">New Equipment</a>
+              <h3 class="card-title">Show Ticket</h3>
+              <a class="btn btn-info float-right" name="new_equipment" style="color: white;" href="{% url 'ticket:create_ticket' %}">New Ticket</a>
               <!--show messages-->
             </div>
             <!-- Modal -->
@@ -90,17 +90,17 @@
                   <td><span class=" badge bg-success">{{ tkt.status}}</span></td>
                    
                     <td class="project-actions text-center">
-                          <a class="btn btn-primary btn-sm" href="{% url 'ticket_detail' pk=tkt.pk %}" class="btn btn-primary">
+                          <a class="btn btn-primary btn-sm" href="{% url 'ticket:ticket_detail' pk=tkt.pk %}" class="btn btn-primary">
                               <i class="fas fa-folder">
                               </i>
                               View
                           </a>
-                          <a class="btn btn-info btn-sm" href="{% url 'edit_ticket' pk=tkt.pk %} ">
+                          <a class="btn btn-info btn-sm" href="{% url 'ticket:edit_ticket' pk=tkt.pk %} ">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" href=" ">
+                          <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
                               Delete
