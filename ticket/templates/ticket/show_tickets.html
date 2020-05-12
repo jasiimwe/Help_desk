@@ -82,11 +82,11 @@
                   
                   {% for tkt in ticket %}
                 <tr>
-                  <td><a href="" >{{ tkt.ticket_num }}</a></td>
-                  <td>{{ tkt.full_name }}</td>
-                  <td>{{ tkt.ticket_category}}</td>
-                  <td>{{ tkt.description }}</td>
-                  <td>{{ tkt.station }}</td>
+                  <td><a href="" >{{ tkt.ticket.ticket_num }}</a></td>
+                  <td>{{ tkt.ticket.full_name }}</td>
+                  <td>{{ tkt.ticket.ticket_category}}</td>
+                  <td>{{ tkt.ticket.description }}</td>
+                  <td>{{ tkt.ticket.station }}</td>
                   <td><span class=" badge bg-success">{{ tkt.status}}</span></td>
                    
                     <td class="project-actions text-center">
